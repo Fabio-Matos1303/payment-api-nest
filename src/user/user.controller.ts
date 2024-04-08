@@ -8,12 +8,18 @@ import {
   Put,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
+import { UserService } from './user.service';
+import { User } from './interface/user.interface';
 
 @Controller('user')
 export class UserController {
+  // Services que serão usados nos verbos do controller
+  // eslint-disable-next-line prettier/prettier
+  constructor(private readonly userService: UserService) { }
+
   @Get()
-  async getAllUsers() {
-    return 'This action returns all users';
+  async getAllUsers(): Promise<User[]> {
+    return this.userService.getAllUsers();
   }
 
   @Get(':id')
@@ -22,8 +28,8 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() createUser: CreateUserDto) {
-    return createUser;
+  async createUser(@Body() createUser: CreateUserDto): Promise<User> {
+    return this.userService.createUser(createUser);
   }
 
   @Delete(':id')

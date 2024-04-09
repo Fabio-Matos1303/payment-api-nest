@@ -1,36 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
-import { User } from './interface/user.interface';
+import { UserEntity } from './interface/user.entity';
 import { hash } from 'bcrypt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  private users: User[] = [];
-
-  async getAllUsers(): Promise<User[]> {
-    return this.users;
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    // eslint-disable-next-line prettier/prettier
+  ) { }
+  async getAllUsers(): Promise<UserEntity[]> {
+    return this.userRepository.find();
   }
 
   getUser() {
     return 'This action returns a user';
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const saltRounds = 10;
-
     const passwordHashed = await hash(createUserDto.password, saltRounds);
 
-    const user: User = {
+    return this.userRepository.save({
       ...createUserDto,
-      id: this.users.length + 1,
       password: passwordHashed,
-    };
-
-    this.users.push(user);
-
-    console.log('passwordHashed', passwordHashed);
-
-    return user;
+    });
   }
 
   deleteUser() {
@@ -38,6 +35,6 @@ export class UserService {
   }
 
   editUser() {
-    return 'This action edits a users data';
+    return 'This action edits a userRepository data';
   }
 }

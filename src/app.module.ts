@@ -16,6 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'postgres',
       password: '12345678',
       database: 'postgres',
+      synchronize: true,
+      entities: [`${__dirname}/**/*.entity{.js,.ts}`],
     }),
     UserModule,
   ],
@@ -24,4 +26,5 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   // Services: Lógica
   providers: [],
 })
+// eslint-disable-next-line prettier/prettier
 export class AppModule { }

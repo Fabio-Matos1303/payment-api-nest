@@ -8,6 +8,7 @@ import { UserEntity } from './entity/user.entity';
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 // eslint-disable-next-line prettier/prettier
 export class UserModule { }

@@ -28,8 +28,8 @@ export class UserController {
   }
 
   @Get(':id')
-  async getUser(@Param('id') id: string) {
-    return `This action returns the ${id}user`;
+  async getUserById(@Param('id') id: string): Promise<ReturnUserDto> {
+    return await this.userService.findUserById(+id);
   }
 
   @UsePipes(ValidationPipe)

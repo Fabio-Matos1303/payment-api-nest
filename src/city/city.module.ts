@@ -9,6 +9,7 @@ import { CityEntity } from './entities/city.entity';
   controllers: [CityController],
   providers: [CityService],
   imports: [TypeOrmModule.forFeature([CityEntity]), CacheModule],
+  exports: [CityService],
 })
 
 // eslint-disable-next-line prettier/prettier

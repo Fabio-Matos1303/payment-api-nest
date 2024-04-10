@@ -27,9 +27,11 @@ export class UserController {
     );
   }
 
-  @Get(':id')
-  async getUserById(@Param('id') id: string): Promise<ReturnUserDto> {
-    return await this.userService.findUserById(+id);
+  @Get(':userId')
+  async getUserById(@Param('userId') userId: number): Promise<ReturnUserDto> {
+    return new ReturnUserDto(
+      await this.userService.getUserByIdWithRelations(+userId),
+    );
   }
 
   @UsePipes(ValidationPipe)
@@ -38,12 +40,12 @@ export class UserController {
     return this.userService.createUser(createUser);
   }
 
-  @Delete(':id')
+  @Delete(':userId')
   async deleteUser() {
     return 'This action creates a user';
   }
 
-  @Put(':id')
+  @Put(':userId')
   async editUser() {
     return 'This action edits a users data';
   }

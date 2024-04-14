@@ -7,6 +7,8 @@ import { CityModule } from './city/city.module';
 import { AddressModule } from './address/address.module';
 import { CacheModule } from './cache/cache.module';
 import { AuthModule } from './auth/auth.module';
+import { RolesGuard } from './guards/roles.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   // Importar informações doSevice de módulo
@@ -35,7 +37,12 @@ import { AuthModule } from './auth/auth.module';
   // Controllers: Verbos
   controllers: [],
   // Services: Lógica
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 // eslint-disable-next-line prettier/prettier
 export class AppModule { }

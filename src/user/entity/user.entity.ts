@@ -29,7 +29,7 @@ export class UserEntity {
   cpf: string;
 
   @Column({ name: 'role', nullable: false })
-  role: string;
+  role: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

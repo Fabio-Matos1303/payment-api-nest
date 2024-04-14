@@ -17,7 +17,7 @@ export class AddressController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly addressService: AddressService) { }
 
-  @Roles(Role.USER)
+  @Roles(Role.ADMIN)
   @Post(':userId')
   @UsePipes(ValidationPipe)
   async createAddress(

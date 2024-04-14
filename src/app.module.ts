@@ -9,6 +9,7 @@ import { CacheModule } from './cache/cache.module';
 import { AuthModule } from './auth/auth.module';
 import { RolesGuard } from './guards/roles.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   // Importar informações doSevice de módulo
@@ -33,6 +34,7 @@ import { APP_GUARD } from '@nestjs/core';
     AddressModule,
     CacheModule,
     AuthModule,
+    JwtModule,
   ],
   // Controllers: Verbos
   controllers: [],

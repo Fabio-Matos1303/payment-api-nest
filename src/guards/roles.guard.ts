@@ -36,7 +36,7 @@ export class RolesGuard {
       return false;
     }
 
-    console.log(loginPayload);
+    console.log('ID:', loginPayload.id, 'ROLE:', loginPayload.role);
 
     return requiredRoles.some((role) => role === loginPayload.role);
   }
